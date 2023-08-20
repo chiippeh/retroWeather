@@ -1,111 +1,68 @@
-# import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# import json
-
-# df = pd.read_csv('./allweather-2018.csv')
-
-# df['Date'] = pd.to_datetime(df['Date'])
-# df['Date'] = df['Date'].dt.strftime('%m-%d-%Y')
-
-# df['Hi Temp'] = pd.to_numeric(df['Hi Temp'], errors='coerce')
-# df['Low Temp'] = pd.to_numeric(df['Low Temp'], errors='coerce')
-
-# df['Avg Temp'] = (df['Hi Temp'] + df['Low Temp']) / 2
-
-# columns_to_keep = ['Date', 'Time', 'Avg Temp']  # List the columns you want to keep
-# df = df[columns_to_keep]
-
-# daily_avg_temp = df.groupby("Date")["Avg Temp"].mean().reset_index()
-
-# # Create a list of dates in the format 'mm-dd-yyyy' for January 2018
-# january_dates = [f'01-{str(day).zfill(2)}-2018' for day in range(1, 32)]
-
-# # Create a DataFrame for January 2018 with 'Avg Temp' set to NaN for all days
-# january_df = pd.DataFrame({'Date': january_dates, 'Avg Temp': np.nan})
-
-# # Concatenate the January DataFrame with the existing daily_avg_temp DataFrame
-# complete_daily_avg_temp = pd.concat([january_df, daily_avg_temp])
-
-# # Sort the DataFrame by 'Date'
-# complete_daily_avg_temp = complete_daily_avg_temp.sort_values(by='Date')
-
-# print(daily_avg_temp)
-
-# date_list = daily_avg_temp['Date'].tolist()
-# temp_list = daily_avg_temp['Avg Temp'].tolist()
-
-# # print(date_list)
-# # print(temp_list)
-
-# #Create a dictionary in the desired format
-# json_data = {
-#     'date': date_list,
-#     'temp': temp_list
-# }
-
-# # Write the JSON data to a file
-# with open('rhodesWeatherStation_2018.json', 'w') as json_file:
-#     json.dump(json_data, json_file, indent=4)
-
-# print("Data exported to rhodesWeatherStation_" + ".json")
-
-
-
-import numpy as np
 import pandas as pd
 import json
 
-# Load your existing data from the CSV file
-df = pd.read_csv('./allweather-2018.csv')
+# List of years to process
+years = [2018, 2019, 2020, 2021, 2022]
+# years = [2018]
 
-# Convert the 'Date' column to datetime format
-df['Date'] = pd.to_datetime(df['Date'])
-df['Date'] = df['Date'].dt.strftime('%m-%d-%Y')
+    # Loop through each year and process the data
+for year in years:
+    # Construct the file path for the CSV file
+    file_path = f'./rawRhodesWeatherData/allweather-{year}.csv'
+    print(file_path)
+    # Load data from the CSV file
+    df = pd.read_csv(file_path)
 
-# Convert 'Hi Temp' and 'Low Temp' columns to numeric, setting errors to coerce
-df['Hi Temp'] = pd.to_numeric(df['Hi Temp'], errors='coerce')
-df['Low Temp'] = pd.to_numeric(df['Low Temp'], errors='coerce')
+    # Convert the 'Date' column to datetime format
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = df['Date'].dt.strftime('%m-%d-%Y')
 
-# Calculate the 'Avg Temp' column as the average of 'Hi Temp' and 'Low Temp'
-df['Avg Temp'] = (df['Hi Temp'] + df['Low Temp']) / 2
+    # Convert 'Hi Temp' and 'Low Temp' columns to numeric, setting errors to coerce
+    df['Hi Temp'] = pd.to_numeric(df['Hi Temp'], errors='coerce')
+    df['Low Temp'] = pd.to_numeric(df['Low Temp'], errors='coerce')
 
-# List of columns to keep
-columns_to_keep = ['Date', 'Time', 'Avg Temp']
+    # Calculate the 'Avg Temp' column as the average of 'Hi Temp' and 'Low Temp'
+    df['Avg Temp'] = (df['Hi Temp'] + df['Low Temp']) / 2
 
-# Filter the DataFrame to only keep the desired columns
-df = df[columns_to_keep]
+    # List of columns to keep
+    columns_to_keep = ['Date', 'Time', 'Avg Temp']
 
-# Group by 'Date' and calculate the daily average temperature
-daily_avg_temp = df.groupby("Date")["Avg Temp"].mean().reset_index()
+    # Filter the DataFrame to only keep the desired columns
+    df = df[columns_to_keep]
 
-# Create a list of dates in the format 'mm-dd-yyyy' for January 2018
-january_dates = [f'01-{str(day).zfill(2)}-2018' for day in range(1, 32)]
+    # Group by 'Date' and calculate the daily average temperature
+    daily_avg_temp = df.groupby("Date")["Avg Temp"].mean().reset_index()
 
-# Create a DataFrame for January 2018 with 'Avg Temp' set to NaN for all days
-january_df = pd.DataFrame({'Date': january_dates, 'Avg Temp': 22.5})
+    if year == 2018:
+        # Create a list of dates in the format 'mm-dd-yyyy' for January 2018
+        january_dates = [f'01-{str(day).zfill(2)}-{year}' for day in range(1, 32)]
 
-# Concatenate the January DataFrame with the existing daily_avg_temp DataFrame
-complete_daily_avg_temp = pd.concat([january_df, daily_avg_temp])
+        # Create a DataFrame for January 2018 with 'Avg Temp' set to NaN for all days
+        january_df = pd.DataFrame({'Date': january_dates, 'Avg Temp': 22.5})
 
-# Sort the DataFrame by 'Date'
-complete_daily_avg_temp = complete_daily_avg_temp.sort_values(by='Date')
+        # Concatenate the January DataFrame with the existing daily_avg_temp DataFrame
+        complete_daily_avg_temp = pd.concat([january_df, daily_avg_temp])
+    else:
+        # Concatenate the January DataFrame with the existing daily_avg_temp DataFrame
+        complete_daily_avg_temp = daily_avg_temp
 
-# Convert 'Date' column back to datetime format if needed
-complete_daily_avg_temp['Date'] = pd.to_datetime(complete_daily_avg_temp['Date'])
+    # Sort the DataFrame by 'Date'
+    complete_daily_avg_temp = complete_daily_avg_temp.sort_values(by='Date')
 
-# Reset index
-complete_daily_avg_temp = complete_daily_avg_temp.reset_index(drop=True)
+    # Convert 'Date' column back to datetime format if needed
+    complete_daily_avg_temp['Date'] = pd.to_datetime(complete_daily_avg_temp['Date'])
 
-# Create a dictionary in the desired format
-json_data = {
-    'date': complete_daily_avg_temp['Date'].dt.strftime('%m-%d-%Y').tolist(),
-    'temp': complete_daily_avg_temp['Avg Temp'].tolist()
-}
+    # Reset index
+    complete_daily_avg_temp = complete_daily_avg_temp.reset_index(drop=True)
 
-# Write the JSON data to a file
-with open('rhodesWeatherStation_2018.json', 'w') as json_file:
-    json.dump(json_data, json_file, indent=4)
+    # Create a dictionary in the desired format
+    json_data = {
+        'date': complete_daily_avg_temp['Date'].dt.strftime('%m-%d-%Y').tolist(),
+        'temp': complete_daily_avg_temp['Avg Temp'].tolist()
+    }
 
-print("Data exported to rhodesWeatherStation_2018.json")
+    # Write the JSON data to a file for each year
+    with open(f'./cleanedRhodesWeatherData/rhodesWeatherStation_{year}.json', 'w') as json_file:
+        json.dump(json_data, json_file, indent=4)
+
+    print(f"Data exported to ./cleanedRhodesWeatherData/rhodesWeatherStation_{year}.json")

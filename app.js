@@ -8,9 +8,6 @@ let graphDate = "2018";
 graphDateText.textContent = graphDate;
 createGraphs(graphDate);
 
-
-
-
 function btnClicked(e) {
     // if left button is clicked
     if (e.target.classList.contains('leftButton')) {
@@ -39,15 +36,13 @@ function btnClicked(e) {
             createGraphs(graphDate);
         }
     }
-
-    console.log(e.target);
-    // leftDateButton.classList.add('num-squares-onclick');
-    // squareNumText.classList.add('num-squares-text-onclick');
-    // setTimeout(() => {
-    //     squareNumText.style.display = 'none';
-    //     gridForm.style.display = 'block';
-    // }, 500);
 }
+
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Update the currentYear element's content
+document.getElementById('currentYear').textContent = currentYear;
 
 leftDateButton.addEventListener('click', btnClicked);
 rightDateButton.addEventListener('click', btnClicked);

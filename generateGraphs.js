@@ -29,7 +29,6 @@ function graph1(year) {
     const baseUrl = "https://archive-api.open-meteo.com/v1/archive?latitude=-33.3042&longitude=26.5328&start_date=2018-01-01&end_date=2018-12-31&daily=temperature_2m_mean&timezone=Africa%2FCairo";
     const updatedUrl = baseUrl.replace(/start_date=[^&]+/, `start_date=${year}-01-01`)
     .replace(/end_date=[^&]+/, `end_date=${year}-12-31`);
-    console.log(updatedUrl);
 
     // Fetch the JSON data from the URL
     fetch(updatedUrl)
@@ -47,7 +46,7 @@ function graph1(year) {
                     labels: dates,
                     datasets: [
                         {
-                            label: "Temperature (°C)",
+                            label: ``,
                             data: temperatureData,
                             fill: false,
                             borderWidth: 2
@@ -83,7 +82,16 @@ function graph1(year) {
                                 text: "Temperature (°C)"
                             }
                         }
-                    }
+                    },
+                    plugins: {
+                        title: {
+                          display: true,
+                          text: `API datasource (https://open-meteo.com) - Average Temperature in Grahamstown (Makhanda) - ${year}`,
+                          font: {
+                            size: 25
+                          }
+                        }
+                    }                    
                 }
             });
         })
@@ -93,7 +101,10 @@ function graph1(year) {
 }
 
 function graph2(year) {
-    fetch('./rhodesWeatherStation_2018.json')
+    // Fetch the JSON data from local file depending on the year
+    const directory = `./cleanedRhodesWeatherData/rhodesWeatherStation_${year}.json`;
+
+    fetch(directory)
     .then(response => response.json())
     .then(data => {
         // Extract dates and temperature data
@@ -145,7 +156,16 @@ function graph2(year) {
                             text: "Temperature (°C)"
                         }
                     }
-                }
+                },
+                plugins: {
+                    title: {
+                      display: true,
+                      text: `Rhodes Weather Data Store - Average Temperature in Grahamstown (Makhanda) - ${year}`,
+                      font: {
+                        size: 25
+                      }
+                    }
+                }            
             }
         });
     })
