@@ -1,0 +1,42 @@
+[
+    {
+        "province_name": "Eastern Cape",
+        "province_percent_capacity": "82"
+    },
+    {
+        "province_name": "Free State",
+        "province_percent_capacity": "97"
+    },
+    {
+        "province_name": "Gauteng",
+        "province_percent_capacity": "98"
+    },
+    {
+        "province_name": "Kindom of Lesotho*",
+        "province_percent_capacity": "94"
+    },
+    {
+        "province_name": "Kingdom of Eswatini*",
+        "province_percent_capacity": "100"
+    },
+    {
+        "province_name": "Kwazulu-Natal",
+        "province_percent_capacity": "89"
+    },
+    {
+        "province_name": "Limpopo",
+        "province_percent_capacity": "87"
+    },
+    {
+        "province_name": "Mpumalanga",
+        "province_percent_capacity": "97"
+    },
+    {
+        "province_name": "North West",
+        "province_percent_capacity": "88"
+    },
+    {
+        "province_name": "Western Cape",
+        "province_percent_capacity": "91"
+    }
+]

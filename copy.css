@@ -1,0 +1,90 @@
+body,html {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    background-color: rgb(68, 68, 68);
+}
+
+body {
+    /* height: 100%; */
+    background-color: rgb(32, 32, 32);
+}
+
+main {
+    display: flex;
+    /* height: 100vh; */
+    height: calc(100vh);
+    /* I don't know why I had to minus 36px, but it works */
+}
+
+.histContainer {
+    width: 25%;
+}
+
+.graphContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.chartContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 2em;
+    /* width: 850px; Adjust to your desired width */
+    width: 900px;
+    /* width: 60%; */
+}
+
+.graph1,.graph2 {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding-left: 0.5em;
+}
+
+.graphText {
+    display: flex;
+    align-items: center;
+    height: 355px;
+    width: 160px;
+}
+
+.tempGraph {
+    background-color: rgb(20, 20, 20);
+    border-radius: 20px;
+    padding: 1em;
+}
+
+footer {
+    background-color: green;
+}
+
+
+@media (max-width: 1366px) {
+    main {
+      flex-direction: column; /* Change to column layout */
+    }
+  
+    .histContainer {
+      width: 100%; /* Make the histContainer take full width */
+    }
+  
+    .graphContainer {
+      width: 100%; /* Make the graphContainer take full width */
+    }
+
+    .chartContainer {
+        /* width: 850px; Adjust to your desired width */
+        width: 85%;
+    }
+    
+  }

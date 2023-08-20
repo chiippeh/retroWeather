@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <script type="module" src="app.js" defer></script>
+    <title></title>
+</head>
+<body>
+    <main>
+        <div class="histogramDesc">
+            <div class="descTitle">Main Title</div>
+            <div class="descText">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam animi consequatur iusto placeat mollitia itaque vel voluptates, natus autem illum accusamus assumenda id, dolorem porro minus! Labore expedita est saepe!
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et quo omnis, corrupti modi earum praesentium, delectus sunt corporis ullam aliquam unde dicta excepturi nesciunt magni est quod dolore laboriosam illo!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita molestias maiores animi consequatur, in aliquid praesentium nulla accusantium mollitia magnam velit atque quibusdam error beatae provident reprehenderit explicabo laudantium tempora!Lorem
+                <button class="">Show</button>    
+            </div>
+        </div>
+        <div class="histogramContainer">
+            <div class="graph1">
+                <!-- <div class="graphText">Graph Title</div> -->
+                <canvas class="tempGraph" id="temperatureChart"></canvas>
+            </div>
+            <div class="dateChanger">
+                <button class="leftButton"><</button>
+                <div class="dateText">Date</div>
+                <button class="rightButton">></button>
+            </div>
+            <div class="graph2">
+                <!-- <div class="graphText">Graph Title</div> -->
+                <canvas class="tempGraph" id="rhodesTemperatureChart"></canvas>
+            </div>
+        </div>            
+    </main>
+    <footer>footer</footer>
+</body>
+</html>
